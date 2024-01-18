@@ -1,0 +1,23 @@
+<div class="comments-row">
+    <mat-form-field>
+      <mat-label>Laissez un commentaire</mat-label>
+      <input type="text" matInput placeholder="Laissez un commentaire…" [formControl]="commentCtrl">
+      @if (commentCtrl.invalid) {
+        <mat-error>Entrée non valable !</mat-error>
+      }
+    </mat-form-field>
+    <button mat-icon-button color="primary" (click)="onLeaveComment()">
+      <mat-icon>send</mat-icon>
+    </button>
+  </div>
+
+<mat-list *ngIf="comments.length" @list>
+    <h2 class="fs-5" matSubheader>Commentaires</h2>
+    <mat-list-item *ngFor="let comment of comments; let i = index" 
+      [@listItem]="animationStates[i]" 
+      (mouseenter)="onListItemMouseEnter(i)"
+      (mouseleave)="onListItemMouseLeave(i)">
+      <div class="comment-text" mat-line>{{ comment.comment }}</div>
+      <div class="comment-date" mat-line>{{ comment.createdDate | timeAgo }}</div>
+    </mat-list-item>
+  </mat-list>

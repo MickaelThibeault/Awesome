@@ -1,0 +1,22 @@
+<mat-card>
+    <ng-container *ngIf="candidate$ | async as candidate">
+      <img class="rounded-circle h-auto mx-auto mt-3 " [src]="candidate.imageUrl" [alt]="candidate.firstName + ' ' + candidate.lastName">
+      <div class="employee-info">
+        <h1>{{ candidate.firstName }} {{ candidate.lastName }}</h1>
+        <h2>{{ candidate.job }}, {{ candidate.department }} chez {{ candidate.company }}</h2>
+        <h3>Contact : {{ candidate.email }}</h3>
+      </div>
+    </ng-container>
+    <mat-card-actions class="d-block">
+      <mat-spinner class="mx-auto" [diameter]="100" *ngIf="loading$ | async; else buttons"></mat-spinner>
+      <ng-template #buttons>
+        <div class="action-buttons mx-auto">
+          <button mat-flat-button color="accent" (click)="onHire()">EMBAUCHER</button>
+          <button mat-flat-button color="warn" (click)="onRefuse()">REFUSER</button>
+        </div>      
+        <div>
+            <button mat-flat-button color="primary" (click)="onGoBack()">RETOUR</button>
+        </div>
+      </ng-template>
+    </mat-card-actions>
+  </mat-card>
